@@ -6,3 +6,59 @@
   font-size: 20px;
   color: #7F7F7F;
 }
+
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.poster {
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  margin-right: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  display: inline-block;
+
+  img {
+    display: block;
+  }
+}
+
+.imagePoster {
+
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.movieDetails {
+  position: absolute;
+  background-color: #ddd;
+  width: 700px;
+  top: 50px;
+  left: 50%;
+  margin-left: -350px;
+  display: flex;
+  padding: 16px;  
+}
+
+.textPoster {
+  width: 396px;
+  height: 593px;
+  overflow: hidden;
+  font-size: 32px;
+  padding: 16px;
+  background-color: #ddd;
+  text-overflow: ellipsis;
+}
+
+.movieTitle {
+  font-size: 32px;
+}
