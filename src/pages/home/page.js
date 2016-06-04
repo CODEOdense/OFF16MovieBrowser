@@ -25,7 +25,7 @@ export default class HomePage extends React.Component {
   }
   
   loadData = () => {
-    fetch("http://10.10.5.123:8529/_db/_system/off2016/films").then(data => {
+    fetch("http://192.168.57.10:8529/_db/_system/off2016/films").then(data => {
       return data.json();
     }).then(data => {
       this.setState({

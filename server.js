@@ -1,7 +1,6 @@
 import express from 'express';
 const app = express();
 
-
 /************************************************************
  *
  * Express routes for:
@@ -67,7 +66,7 @@ if (!process.env.PRODUCTION) {
  *
  *****************/
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   const host = server.address().address;
   const port = server.address().port;
