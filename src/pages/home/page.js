@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.css";
-import {Motion, spring} from 'react-motion';
+import {Motion, spring, presets} from 'react-motion';
 
 export default class HomePage extends React.Component {
 
@@ -55,22 +55,42 @@ class MovieDetails extends React.Component {
     if(movie) {
       return (
         <div className={styles.overlay}>
-          <div className={styles.movieDetails}>
-            <Motion defaultStyle={{x: -200}} style={{x: spring(0)}}>
-              {value => (
-                <div>
-                  <div style={{
-                transform: `translate3d(${value.x}px, 0, 0)`,
-              }}><MoviePoster movie={this.props.movie} onPosterClick={()=>{}} /></div>
+          <Motion defaultStyle={{x: -200, x2: 50, a: 0}} style={{x: spring(0), a: spring(1), x2: spring(0)}}>
+            {value => (
+              <div className={styles.movieDetails}>
+                <div style={{ transform: `translate3d(${value.x}px, 0, 0)`, opacity: value.a}}>
+                  <MoviePoster movie={this.props.movie} onPosterClick={()=>{}} />
                 </div>
-              )}
-            </Motion>
-            <div>
-              <div className={styles.movieTitle}>{ movie.en_title }</div>
-              <div>{ movie.country }</div>
-              <button onClick={this.props.onMovieDetailsClose}>Close</button>
-            </div>
-          </div>
+                <div>
+                  <div 
+                    className={styles.movieTitle}
+                    style={{ transform: `translate3d(0, ${value.x}px, 0)` }}>
+                    { movie.en_title }
+                  </div>
+                  <div>
+                    <div style={{ transform: `translate3d(0, ${value.x}px, 0)`, opacity: value.a }}>{ movie.country }</div>
+                  </div>
+                  <div className={styles.description} style={{ transform: `translate3d(${value.x2}px, 0, 0)` }}>
+                    { movie.en_description }
+                  </div>
+                  <div className={styles.castList} style={{ transform: `translate3d(0, ${-value.x}px, 0)`, opacity: value.a }}>
+                    { movie.cast.map(c=> (
+                      <div key={c.cast_id}>
+                        <div className={styles.castImage}>
+                        {c.image_path && <img src={"https://image.tmdb.org/t/p/w396" + c.image_path}/>}
+                        {!c.image_path && <img src="https://www.canvs.in/static/img/profile_pic.png" /> }
+                        <div style={{ "textAlign": "center" }}>{c.name}</div>
+                        </div>
+                      </div>
+                      ))
+                    }
+                  </div>
+                  <button onClick={this.props.onMovieDetailsClose}>Close</button>
+                </div>
+              </div>
+            )}
+    
+          </Motion>
         </div>
       );      
     } else {
